@@ -1,0 +1,24 @@
+from django.db import models
+
+# Create your models here.
+from django.db import models
+
+class Entrepreneur(models.Model):
+    business_name = models.CharField(max_length=255)
+    location = models.CharField(max_length=255, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    lunes_inicio = models.TimeField(blank=True, null=True)
+    lunes_fin = models.TimeField(blank=True, null=True)
+    martes_inicio = models.TimeField(blank=True, null=True)
+    martes_fin = models.TimeField(blank=True, null=True)
+    miercoles_inicio = models.TimeField(blank=True, null=True)
+    miercoles_fin = models.TimeField(blank=True, null=True)
+    jueves_inicio = models.TimeField(blank=True, null=True)
+    jueves_fin = models.TimeField(blank=True, null=True)
+    viernes_inicio = models.TimeField(blank=True, null=True)
+    viernes_fin = models.TimeField(blank=True, null=True)
+    contact_info = models.CharField(max_length=255, blank=True, null=True)
+    logo = models.ImageField(upload_to='logos/', blank=True, null=True)
+
+    def __str__(self):
+        return self.business_name
