@@ -1,0 +1,181 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Categorías - Antojos EAFIT</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'cuentas/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'negocios/css/carrusel.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-top: 20px;
+            margin-bottom: 15px; /* Añadido margen inferior para el buscador */
+        }
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px; /* Añadido margen inferior para las categorías */
+            padding: 0 20px;
+        }
+        .search-input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 80%;
+            max-width: 400px;
+            font-size: 1rem;
+        }
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px -5px;
+            margin: 20px; /* Reducido el margen superior */
+        }
+        .category-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: calc(33.333% - 10px);
+            margin-bottom: 20px; /* Añadido margen inferior entre categorías */
+        }
+        .category-button {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+        }
+        .category-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .category-label {
+            text-align: center;
+            font-size: 1rem; /* Ajusta el tamaño si es necesario */
+            font-weight: 600;
+            color: #333;
+            font-family: 'Poppins', sans-serif;
+            margin-top: 5px; /* Añadido margen superior para el texto */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-bar">
+        <div class="contenedor-izquierda">
+            <div class="icono-menu" id="icono-menu">
+                <div class="linea"></div>
+                <div class="linea"></div>
+                <div class="linea"></div>
+            </div>
+
+            <div class="menu-opciones" id="menu-opciones">
+
+                <a href="{% url 'inicio' %}">Inicio</a>
+                <a href="{% url 'categorias' %}">Categorias</a>
+                <a href="{% url 'catalogo' %}">Emprendimientos</a>
+                <a href="{% url 'create_entrepreneur' %}">Registrar emprendimiento</a>
+                <a href="{% url 'entrepreneur_list' %}">Lista emprendimientos</a>
+            </div>
+        </div>
+
+        <img src="{% static 'cuentas/img/logo.png' %}" alt="Logo" class="logo">
+
+        <div class="iconos-derecha">
+            <i id="icono-usuario" class="fa-solid fa-user"></i>
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <div id="menu-usuario" class="menu-usuario">
+            Antojos EAFIT
+            {% if user.is_authenticated %}
+                <p>Bienvenido, {{ user.nombre_completo }}</p>
+                <a href="{% url 'logout' %}">Cerrar Sesión</a>
+            {% else %}
+                <a href="{% url 'login_view' %}">Iniciar Sesión</a>
+                <a href="{% url 'registro_view' %}">Registrarse</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div id="carouselEmprendimientos" class="carousel slide main-banner-carousel" data-bs-ride="carousel">
+        <div class="carousel-inner main-banner-inner">
+            <div class="carousel-item active main-banner-item">
+                <img src="{% static 'cuentas/img/banner inicial.png' %}" class="d-block w-100" alt="Emprendimiento 1">
+            </div>
+            <div class="carousel-item main-banner-item">
+                <img src="{% static 'cuentas/img/banner2.png' %}" class="d-block w-100" alt="Emprendimiento 2">
+            </div>
+            <div class="carousel-item main-banner-item">
+                <img src="{% static 'cuentas/img/recomendado3.png' %}" class="d-block w-100" alt="Emprendimiento 3">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselEmprendimientos" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselEmprendimientos" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+        </button>
+    </div>
+
+    <h1>CATEGORÍAS</h1>
+    <div class="search-container">
+        <input type="text" class="search-input" placeholder="Buscar categorías...">
+    </div>
+    <div class="categories">
+        <div class="category-item">
+            <a href="/category1"  class="category-button"><img src="{% static 'cuentas/img/galleta2.jpg' %}" alt="Dulcecito"></a>
+            <div class="category-label">Dulcecito</div>
+        </div>
+        <div class="category-item">
+            <a href="/category2" class="category-button"><img src="{% static 'cuentas/img/chips.jpg' %}" alt="Saladito"></a>
+            <div class="category-label">Saladito</div>
+        </div>
+        <div class="category-item">
+            <a href="/category3" class="category-button"><img src="{% static 'cuentas/img/accesorios.jpg' %}" alt="Accesorios"></a>
+            <div class="category-label">Accesorios</div>
+        </div>
+        <div class="category-item">
+            <a href="/category4" class="category-button"><img src="{% static 'cuentas/img/bebida.jpg' %}" alt="Bebidas"></a>
+            <div class="category-label">Bebidas</div>
+        </div>
+        <div class="category-item">
+            <a href="/category5" class="category-button"><img src="{% static 'cuentas/img/servicios.jpg' %}" alt="Servicios"></a>
+            <div class="category-label">Servicios</div>
+        </div>
+        <div class="category-item">
+            <a href="/category6" class="category-button"><img src="{% static 'cuentas/img/candies.jpg' %}" alt="Candies"></a>
+            <div class="category-label">Candies</div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/script_menu.js' %}"></script>
+    <script src="{% static 'js/script_carrusel.js' %}"></script>
+</body>
+
+</html>
