@@ -142,15 +142,12 @@ body{
 
 /* TITULO RECOMENDADOS */
 .texto-recomendados{
-    font-family: 'League Spartan', sans-serif;
-    font-size: 65px;
-    color: transparent;
-    -webkit-text-stroke: 2px gray;
+    font-family: 'Poppins', sans-serif;
+    font-size: 3.5rem;
+    font-weight: bold;
     text-align: center;
-    margin-top: 50px;
-    margin-bottom: 20px;
-    padding: 0;
-
+    color: #333;
+    margin-top: 20px;
 }
 
 

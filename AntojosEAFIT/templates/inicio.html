@@ -13,9 +13,10 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/carrusel_recomendados.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-   
-</head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
 <body>
+
 
     <!-- TOP BAR -->
     <div class="top-bar">
@@ -25,15 +26,15 @@
                 <div class="linea"></div>
                 <div class="linea"></div>
             </div>
-            
+
             <div class="menu-opciones" id="menu-opciones">
 
                 <a href="{% url 'inicio' %}">Inicio</a>
                 <a href="{% url 'categorias' %}">Categorias</a>
-                <a href="{% url 'catalogo' %}">Emprendimientos</a>
+                <a href="{% url 'catalogo' %}">Productos</a>
                 <a href="{% url 'create_entrepreneur' %}">Registrar emprendimiento</a>
                 <a href="{% url 'entrepreneur_list' %}">Lista emprendimientos</a>
-            
+
             </div>
         </div>
 
@@ -83,7 +84,7 @@
             <span class="visually-hidden">Siguiente</span>
         </button>
     </div>
-    
+
     <div class="texto-recomendados">
         RECOMENDADOS
     </div>
@@ -119,7 +120,7 @@
                     </div>
 
                 </div>
-                
+
             </div>
 
             <!-- Parte 2 -->
@@ -181,7 +182,7 @@
                     </div>
 
                 </div>
-                
+
             </div>
 
             <!-- Parte 4 -->
@@ -190,7 +191,7 @@
                     <div class="columna mx-1">
                         <div class="cuadro-recomendado-base cuadro-recomendado-gris">
                             <div class="img-wrapper">
-                                <img src="{% static 'cuentas/img/recomendado10.png'%}" alt="Foto">
+                                <img src="{% static 'cuentas/img/recomendado22.png'%}" alt="Foto">
                             </div>
                         </div>
                         <div class="recomendado-abajo-base recomendado-abajo-azul">Las Cremosas</div>
@@ -214,13 +215,13 @@
                     </div>
 
                 </div>
-                
+
             </div>
- 
 
 
 
-     
+
+
 
         </div>
         <button class="carousel-control-prev exact-arrow" type="button" data-bs-target="#carouselRecomendados" data-bs-slide="prev">
@@ -230,7 +231,7 @@
                 </svg>
             </span>
         </button>
-          
+
         <button class="carousel-control-next exact-arrow" type="button" data-bs-target="#carouselRecomendados" data-bs-slide="next">
             <span class="arrow-icon-wrapper">
                 <svg class="arrow-icon" viewBox="0 0 24 24" width="24" height="24">
@@ -238,16 +239,16 @@
                 </svg>
             </span>
         </button>
-        
+
     </div>
 
 
-    
 
-    
-    
+
+
+
     <a class="bottom-bar" href="{% url 'guia_emprendedor' %}">¿Quieres que tu emprendimiento esté en Antojos Eafit?</a>
-    
+
 
 
 
@@ -256,7 +257,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEk039Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
     <script src="{% static 'js/script_menu.js' %}"></script>
     <script src="{% static 'js/script_carrusel.js' %}"></script>
-   
+
 </body>
 </html>
 
