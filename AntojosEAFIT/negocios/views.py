@@ -31,5 +31,13 @@ def product_detail(request, pk):
     return render(request, 'product_detail.html', {'product': product})
 
 
+def category_products(request, category_name):
+    # Filtrar productos por la categoría seleccionada
+    products = Product.objects.filter(category=category_name)
+
+    # Debugging: Imprimir los productos filtrados
+    print(f"Category: {category_name}, Products: {list(products)}")
+
+    return render(request, 'category_products.html', {'products': products, 'category_name': category_name})
 
 

@@ -158,38 +158,37 @@
             <img src="{% static 'cuentas/img/galleta2.jpg' %}" alt="Dulcecito">
             <h3>Dulcecito</h3>
             <p>Galletas, brownies y más.</p>
-            <a href="/category1">Ver productos</a>
+            <a href="{% url 'category_products' 'Dulcesito' %}">Ver productos</a>
         </div>
         <div class="card">
             <img src="{% static 'cuentas/img/chips.jpg' %}" alt="Saladito">
             <h3>Saladito</h3>
             <p>Snacks salados y más.</p>
-            <a href="/category2">Ver productos</a>
+            <a href="{% url 'category_products' 'Saladito' %}">Ver productos</a>
         </div>
         <div class="card">
             <img src="{% static 'cuentas/img/accesorios.jpg' %}" alt="Accesorios">
             <h3>Accesorios</h3>
             <p>Artículos únicos.</p>
-            <a href="/category3">Ver productos</a>
+            <a href="{% url 'category_products' 'Accesorios' %}">Ver productos</a>
         </div>
         <div class="card">
             <img src="{% static 'cuentas/img/bebida.jpg' %}" alt="Bebidas">
             <h3>Bebidas</h3>
             <p>Jugos, cafés y más.</p>
-            <a href="/category4">Ver productos</a>
+            <a href="{% url 'category_products' 'Bebidas' %}">Ver productos</a>
         </div>
         <div class="card">
             <img src="{% static 'cuentas/img/servicios.jpg' %}" alt="Servicios">
             <h3>Servicios</h3>
             <p>Ofertas y más.</p>
-            <a href="/category5">Ver productos</a>
+            <a href="{% url 'category_products' 'Servicios' %}">Ver productos</a>
         </div>
         <div class="card">
             <img src="{% static 'cuentas/img/candies.jpg' %}" alt="Candies">
             <h3>Candies</h3>
             <p>Dulces y caramelos.</p>
-            <a href="/category6">Ver productos</a>
-        </div>
+            <a href="{% url 'category_products' 'Candies' %}">Ver productos</a>        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
