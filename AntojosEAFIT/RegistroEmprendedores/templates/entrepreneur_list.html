@@ -105,7 +105,19 @@
                         </td>
                         <td>{{ e.contact_info }}</td>
                         <td>
-                            <a href="{% url 'delete_entrepreneur' e.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton{{ e.pk }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Acciones
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ e.pk }}">
+                                    <li>
+                                        <a class="dropdown-item text-danger" href="{% url 'delete_entrepreneur' e.pk %}">Eliminar</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{% url 'add_product' e.pk %}">Agregar Producto</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </td>
                     </tr>
                 {% endfor %}
@@ -113,6 +125,7 @@
         </table>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'js/script_menu.js' %}"></script>
 </body>
 </html>

@@ -27,3 +27,11 @@ class EntrepreneurForm(forms.ModelForm):
             'contact_info': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'logo': forms.ClearableFileInput(attrs={'class': 'form-control form-control-sm'}),
         }
+
+from django import forms
+from .models import Product
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['name', 'price', 'category', 'description', 'image']
