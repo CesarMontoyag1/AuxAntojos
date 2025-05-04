@@ -16,7 +16,7 @@
                 <hr>
                 <a href="{% url 'inicio' %}" class="btn btn-primary">Ir al inicio</a>
                 <a href="{% url 'entrepreneur_list' %}" class="btn btn-success">Ver lista de emprendimientos</a>
-                <a href="{% url 'add_product' %}" class="btn btn-outline-secondary">Agregar otro producto</a>
+                <a href="{% url 'add_product' pk=entrepreneur.pk %}" class="btn btn-outline-secondary">Agregar otro producto</a>
             </div>
         </div>
     </div>

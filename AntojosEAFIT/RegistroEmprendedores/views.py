@@ -25,73 +25,113 @@ def success(request):
     return render(request, 'success.html')
 
 def entrepreneur_list(request):
-    entrepreneurs = Entrepreneur.objects.all()
+    entrepreneurs = Entrepreneur.objects.prefetch_related('products')  # Use the correct related name
     return render(request, 'entrepreneur_list.html', {'entrepreneurs': entrepreneurs})
+
 
 
 def add_product(request, pk):
     entrepreneur = get_object_or_404(Entrepreneur, pk=pk)
 
-    # Map category IDs to category names
-    category_mapping = {
-        "1": "Dulcesito",
-        "2": "Saladito",
-        "3": "Accesorios",
-        "4": "Bebidas",
-        "5": "Servicios",
-        "6": "Candies",
-    }
-
     if request.method == 'POST':
         try:
-            # Retrieve form data
             name = request.POST.get('name')
             description = request.POST.get('description')
             price = request.POST.get('price')
             image = request.FILES.get('image')
-            category_id = request.POST.get('category')  # Get category ID from form
+            category_id = request.POST.get('category')
 
-            # Map category ID to category name
-            category_name = category_mapping.get(category_id, "")  # Default to empty string if not found
+            category_mapping = {
+                "1": "Dulcesito",
+                "2": "Saladito",
+                "3": "Accesorios",
+                "4": "Bebidas",
+                "5": "Servicios",
+                "6": "Candies",
+            }
+            category_name = category_mapping.get(category_id, "")
 
-            # Debugging prints
-            print(f"Name: {name}")
-            print(f"Description: {description}")
-            print(f"Price: {price}")
-            print(f"Image: {image}")
-            print(f"Category ID: {category_id}")
-            print(f"Category Name: {category_name}")
-            print(f"Entrepreneur: {entrepreneur}")
-
-            # Ensure all required fields are provided
             if not name or not description or not price or not image or not category_name:
-                print("Error: Missing required fields.")
                 return HttpResponse("Error: All fields are required.")
 
-            # Create the product
-            product = Product.objects.create(
+            Product.objects.create(
                 name=name,
                 description=description,
                 price=price,
                 image=image,
-                category=category_name,  # Save category name
+                category=category_name,
                 entrepreneur=entrepreneur
             )
-            print(f"Product created: {product}")
-            return render(request, 'product_success.html')  # Redirect to the catalog
+            return redirect('product_success', pk=entrepreneur.pk)  # Redirección con pk
         except Exception as e:
-            print(f"Error: {e}")
             return HttpResponse(f"Error: {e}")
     return render(request, 'add_product.html', {'entrepreneur': entrepreneur})
+
+
+def view_products(request, pk):
+    entrepreneur = get_object_or_404(Entrepreneur, pk=pk)
+    products = Product.objects.filter(entrepreneur=entrepreneur)
+    return render(request, 'view_products.html', {'entrepreneur': entrepreneur, 'products': products})
+
+def edit_product(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    entrepreneur = product.entrepreneur  # Get the associated entrepreneur
+
+    if request.method == 'POST':
+        try:
+            name = request.POST.get('name')
+            description = request.POST.get('description')
+            price = request.POST.get('price')
+            image = request.FILES.get('image')
+            category_id = request.POST.get('category')
+
+            category_mapping = {
+                "1": "Dulcesito",
+                "2": "Saladito",
+                "3": "Accesorios",
+                "4": "Bebidas",
+                "5": "Servicios",
+                "6": "Candies",
+            }
+            category_name = category_mapping.get(category_id, "")
+
+            if not name or not description or not price or not category_name:
+                return HttpResponse("Error: All fields except image are required.")
+
+            # Update the product fields
+            product.name = name
+            product.description = description
+            product.price = price
+            product.category = category_name
+
+            if image:  # Update the image only if a new one is provided
+                product.image = image
+
+            product.save()
+            return redirect('view_products', pk=entrepreneur.pk)  # Redirect to the product list
+        except Exception as e:
+            return HttpResponse(f"Error: {e}")
+
+    return render(request, 'edit_product.html', {'product': product, 'entrepreneur': entrepreneur})
+
+
+def delete_product(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    if request.method == 'POST':
+        product.delete()
+        return redirect('view_products', pk=product.entrepreneur.pk)  # Redirect to the product list
+    return render(request, 'confirm_delete_product.html', {'product': product})
+
+
+
+def product_success(request, pk):
+    entrepreneur = get_object_or_404(Entrepreneur, pk=pk)
+    return render(request, 'product_success.html', {'entrepreneur': entrepreneur})
 
 
 def catalogo(request):
     # Group products by category
     categories = Product.objects.values_list('category', flat=True).distinct()
     categorized_products = {category: Product.objects.filter(category=category) for category in categories}
-
-    # Debugging: Print the categorized products
-    for category, products in categorized_products.items():
-        print(f"Category: {category}, Products: {list(products)}")
 
     return render(request, 'catalogo.html', {'categorized_products': categorized_products})
